@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import SiteHeader from "@/components/site-header";
 import SiteFooter from "@/components/site-footer";
+import PageHero from "@/components/page-hero";
+import InView from "@/components/in-view";
 import { products } from "@/lib/site-data";
 
 export function generateStaticParams() {
@@ -21,40 +23,95 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <SiteHeader />
-      <main id="top">
-        <div className="section-wrap subpage-hero">
-          <div className="crumb"><a href="/">HOME</a><span>/</span><a href="/work">PROJECTS</a><span>/</span><span>{product.name.toUpperCase()}</span></div>
-          <div className="section-kicker" style={{ marginTop: 18 }}><span>{product.code}</span> / {product.type}</div>
-          <h1>{product.name}<span className="accent">.</span></h1>
-          <p>{product.desc}</p>
-          <div className="tag-row">{product.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
-          <div><span className="status-pill"><i />{product.status}</span></div>
-        </div>
+      <main className="k-sub">
+        <PageHero
+          crumbs={[{ label: "HOME", href: "/" }, { label: "PROJECTS", href: "/work" }, { label: product.name.toUpperCase() }]}
+          eyebrow={
+            <span>
+              {product.code} · {product.type}
+            </span>
+          }
+          title={
+            <>
+              {product.name}
+              <span className="k-accent">.</span>
+            </>
+          }
+          lead={product.desc}
+          actions={
+            <>
+              <div className="k-tags" style={{ justifyContent: "center" }}>
+                {product.tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+              <span className="k-status">
+                <i aria-hidden="true" />
+                {product.status}
+              </span>
+            </>
+          }
+        />
 
-        <section className="section-wrap" style={{ paddingBottom: 20 }}>
-          {product.long.map((para, i) => (
-            <p key={i} className={i === 0 ? "large-copy" : undefined} style={i === 0 ? {} : { color: "var(--muted)", fontSize: 14, lineHeight: 1.9 }}>{para}</p>
-          ))}
-          <div className="detail-grid">
-            {product.focus.map((f) => (
-              <div className="detail-cell" key={f.title}><h3>{f.title}</h3><p>{f.copy}</p></div>
-            ))}
-          </div>
-          <h2 style={{ marginTop: 44 }}>What is next.</h2>
-          <ul className="check-list">
-            {product.roadmap.map((step, i) => <li key={step}><b>{String(i + 1).padStart(2, "0")}</b>{step}</li>)}
-          </ul>
-          <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 26 }}>
-            <a className="know-more" href="/#contact">Know more — talk to us <span>↗</span></a>
-            <a className="know-more quiet" href="/work">← All projects</a>
+        <section className="k-block">
+          <div className="k-wrap">
+            <InView className="k-rv">
+              <div className="k-prose">
+                {product.long.map((para, i) => (
+                  <p key={i} className={i === 0 ? "k-prose-lead" : undefined}>
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </InView>
+
+            <div className="k-cards" style={{ marginTop: "clamp(2.5rem, 5vw, 4rem)" }}>
+              {product.focus.map((f) => (
+                <article className="k-card" key={f.title}>
+                  <h3 style={{ marginTop: 0 }}>{f.title}</h3>
+                  <p>{f.copy}</p>
+                </article>
+              ))}
+            </div>
+
+            <InView className="k-rv">
+              <h2 className="k-block-title">What is next.</h2>
+              <ul className="k-list">
+                {product.roadmap.map((step, i) => (
+                  <li key={step}>
+                    <b>{String(i + 1).padStart(2, "0")}</b>
+                    {step}
+                  </li>
+                ))}
+              </ul>
+            </InView>
+
+            <div className="k-hero-actions" style={{ marginTop: "2.5rem" }}>
+              <Link className="k-btn k-btn--solid" href="/contact">
+                Know more — talk to us <span className="k-btn-arrow">↗</span>
+              </Link>
+              <Link className="k-btn" href="/work">
+                ← All projects
+              </Link>
+            </div>
           </div>
         </section>
 
-        <div className="section-wrap subpage-cta">
-          <div><div className="section-kicker"><span>GS</span> / HONEST STATUS</div><h2 style={{ margin: 0 }}>{product.status}.</h2></div>
-          <a className="know-more" href="/#contact">Discuss this initiative <span>↗</span></a>
-        </div>
+        <section className="k-block">
+          <div className="k-wrap">
+            <div className="k-hero-actions" style={{ justifyContent: "space-between", alignItems: "flex-end" }}>
+              <div>
+                <div className="k-eyebrow">Honest status</div>
+                <h2 className="k-block-title" style={{ marginTop: "0.75rem" }}>
+                  {product.status}.
+                </h2>
+              </div>
+              <Link className="k-btn k-btn--solid" href="/contact">
+                Discuss this initiative <span className="k-btn-arrow">↗</span>
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
       <SiteFooter />
     </>

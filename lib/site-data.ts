@@ -9,6 +9,7 @@ export type Product = {
   className: string;
   status: string;
   tags: string[];
+  media: string[];
   focus: { title: string; copy: string }[];
   roadmap: string[];
 };
@@ -35,6 +36,11 @@ export const products: Product[] = [
     className: "zero",
     status: "Restart / discovery — MVP planning",
     tags: ["Food rescue", "NGOs", "Supabase", "Flutter"],
+    media: [
+      "https://upload.wikimedia.org/wikipedia/commons/f/f5/Anyone_is_free_to_join_in_and_eat_at_the_langar_%2827158029009%29.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/4/42/Mid_day_meal.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/5/5f/The_Children_being_served_the_food_under_the_Mid-day_Meal_Scheme_at_a_primary_school%2C_Wokha_district_in_Nagaland.jpg",
+    ],
     focus: [
       { title: "Six questions", copy: "What food, where and by when, is it safe, which verified partner can collect, was handoff completed, what can be reported." },
       { title: "Safety first", copy: "FSSAI surplus-food recovery rules, acceptance criteria, time-temperature controls, incident process — before volume." },
@@ -56,6 +62,11 @@ export const products: Product[] = [
     className: "air",
     status: "Product initiative",
     tags: ["Healthcare", "Logistics", "Coordination"],
+    media: [
+      "https://upload.wikimedia.org/wikipedia/commons/9/96/Zipline_Drone_Launch.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/1e/Zipline-Muhanga-Robin-Dropping-Package.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/1/10/Zipline-package-drop.jpg",
+    ],
     focus: [
       { title: "Dispatch", copy: "Priority-aware dispatch with live ETAs for hospitals, labs and riders." },
       { title: "Cold-chain", copy: "Custody checkpoints with temperature attestations at each handoff." },
@@ -77,6 +88,11 @@ export const products: Product[] = [
     className: "vayu",
     status: "Research prototype — validating",
     tags: ["PM2.5", "Python", "FastAPI", "CPCB"],
+    media: [
+      "https://upload.wikimedia.org/wikipedia/commons/0/03/Delhi_air_pollution_2019.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/2/23/Smog_as_visible_in_the_Gurgaon_area_near_Delhi_on_Nov_2016.jpg",
+      "https://upload.wikimedia.org/wikipedia/commons/7/79/PIA21100_Severe_Air_Pollution_in_New_Delhi_View_by_NASA%27s_MISR.jpg",
+    ],
     focus: [
       { title: "Weather coupling", copy: "Wind, mixing, boundary-layer dynamics and regional transport — not autoregression alone." },
       { title: "Leakage-safe evals", copy: "Chronological splits, issue-time weather only, per-horizon scores against persistence and climatology." },

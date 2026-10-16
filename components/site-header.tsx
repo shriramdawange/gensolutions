@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Rocket } from "lucide-react";
 
 const links = [
@@ -16,10 +17,10 @@ export default function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <a href="/" className="brand" aria-label="GenSolutions home" onClick={() => setOpen(false)}>
+        <Link href="/" className="brand" aria-label="GenSolutions home" onClick={() => setOpen(false)}>
           <span className="brand-mark">G<span>.</span></span>
           <span className="brand-text">GenSolutions<small>GENERATIVE SOLUTIONS</small></span>
-        </a>
+        </Link>
         <nav className={`main-nav ${open ? "nav-open" : ""}`} aria-label="Main navigation">
           {links.map(([label, href]) => <a key={href} href={href} onClick={() => setOpen(false)}>{label}</a>)}
           <a className="nav-mobile-cta" href="/start-project" onClick={() => setOpen(false)}>Start a project ↗</a>

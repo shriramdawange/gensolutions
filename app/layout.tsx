@@ -1,6 +1,27 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "./theme-reference.css";
+import { Geist, Instrument_Serif } from "next/font/google";
 import GsapReveal from "@/components/gsap-reveal";
+import Preloader from "@/components/preloader";
+import CustomCursor from "@/components/custom-cursor";
+import ScrollNav from "@/components/scroll-nav";
+import LiquidGlassFilter from "@/components/liquid-glass-filter";
+
+const sans = Geist({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600"],
+  variable: "--font-sans",
+  display: "swap"
+});
+
+const display = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-display",
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://gensolutions.in"),
@@ -31,14 +52,30 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#080a0a",
-  colorScheme: "dark"
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#121212" },
+    { media: "(prefers-color-scheme: light)", color: "#fcfcfc" }
+  ],
+  colorScheme: "dark light"
 };
+
+const themeScript = `try{if(localStorage.getItem('theme')==='light'){document.documentElement.dataset.theme='light'}}catch(e){}`;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <body>{children}<GsapReveal /></body>
+    <html lang="en" className={`${sans.variable} ${display.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body>
+        <Preloader />
+        <CustomCursor />
+        <LiquidGlassFilter />
+        <div className="k-noise-overlay" aria-hidden="true" />
+        <ScrollNav />
+        {children}
+        <GsapReveal />
+      </body>
     </html>
   );
 }

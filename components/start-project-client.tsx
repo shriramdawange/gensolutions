@@ -6,7 +6,7 @@ const STEPS = [
   { n: "01", title: "Tell us", copy: "The problem, the idea, the outcome you want." },
   { n: "02", title: "Scope", copy: "We reply within 2 working days with questions and a scope sketch." },
   { n: "03", title: "Prototype", copy: "A thin slice you can click, measure and challenge." },
-  { n: "04", title: "Build", copy: "Iterate in the open with evals and demos." },
+  { n: "04", title: "Build", copy: "Iterate in the open with evals and demos." }
 ];
 
 const TYPES = ["AI engineering & agents", "Software / platform development", "Research & development", "Product collaboration", "Other / not sure yet"];
@@ -29,8 +29,8 @@ export default function StartProjectClient() {
           name: form.name,
           email: form.email,
           interest: `${form.type} · ${form.budget} · ${form.timeline}`,
-          message: form.message,
-        }),
+          message: form.message
+        })
       });
       const out = await res.json();
       if (!res.ok) throw new Error(out.error || "Could not send. Please email us directly.");
@@ -42,11 +42,10 @@ export default function StartProjectClient() {
   }
 
   return (
-    <>
-      {/* animated timeline */}
-      <div className="sp-timeline">
+    <div className="k-sp-form">
+      <div className="k-flow">
         <motion.div
-          className="sp-timeline-fill"
+          className="k-flow-fill"
           initial={{ scaleX: 0 }}
           animate={{ scaleX: (stage + 1) / 4 }}
           transition={{ type: "spring", stiffness: 60, damping: 20 }}
@@ -56,24 +55,28 @@ export default function StartProjectClient() {
             key={s.n}
             type="button"
             onClick={() => setStage(i)}
-            className={`sp-node ${i <= stage ? "on" : ""} ${i === stage ? "now" : ""}`}
+            className={`k-flow-node ${i <= stage ? "on" : ""} ${i === stage ? "now" : ""}`}
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ delay: i * 0.12, type: "spring", stiffness: 90, damping: 16 }}
             aria-current={i === stage}
           >
-            <span className="sp-dot" />
-            <span className="sp-n mono">{s.n}</span>
-            <span className="sp-t">{s.title}</span>
-            <span className="sp-c">{s.copy}</span>
+            <span className="k-flow-dot" />
+            <span className="k-flow-num">{s.n}</span>
+            <span className="k-flow-title">{s.title}</span>
+            <span className="k-flow-copy">{s.copy}</span>
           </motion.button>
         ))}
       </div>
 
-      {/* stepped form */}
-      <form className="contact-form sp-form" onSubmit={submit}>
-        <div className="form-heading"><span className="mono">PROJECT BRIEF / {String(stage + 1).padStart(2, "0")} — {STEPS[stage].title.toUpperCase()}</span><span className="form-required">* REQUIRED</span></div>
+      <form className="k-form" onSubmit={submit}>
+        <div className="k-form-head">
+          <span>
+            Project brief / {String(stage + 1).padStart(2, "0")} — {STEPS[stage].title.toUpperCase()}
+          </span>
+          <span className="k-form-required">* Required</span>
+        </div>
         <AnimatePresence mode="wait">
           <motion.div
             key={stage}
@@ -83,57 +86,93 @@ export default function StartProjectClient() {
             transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
           >
             {stage === 0 && (
-              <label>What do you want to build? *
-                <div className="sp-pills">
+              <div className="k-field">
+                What do you want to build? *
+                <div className="k-pills">
                   {TYPES.map((t) => (
-                    <button type="button" key={t} className={form.type === t ? "on" : ""} onClick={() => setForm({ ...form, type: t })}>{t}</button>
+                    <button type="button" key={t} className={`k-pill ${form.type === t ? "on" : ""}`} onClick={() => setForm({ ...form, type: t })}>
+                      {t}
+                    </button>
                   ))}
                 </div>
-              </label>
+              </div>
             )}
             {stage === 1 && (
               <>
-                <label>Budget range *
-                  <div className="sp-pills">
+                <div className="k-field">
+                  Budget range *
+                  <div className="k-pills">
                     {BUDGETS.map((b) => (
-                      <button type="button" key={b} className={form.budget === b ? "on" : ""} onClick={() => setForm({ ...form, budget: b })}>{b}</button>
+                      <button type="button" key={b} className={`k-pill ${form.budget === b ? "on" : ""}`} onClick={() => setForm({ ...form, budget: b })}>
+                        {b}
+                      </button>
                     ))}
                   </div>
-                </label>
-                <label>Timeline *
-                  <div className="sp-pills">
+                </div>
+                <div className="k-field" style={{ marginTop: "1.25rem" }}>
+                  Timeline *
+                  <div className="k-pills">
                     {TIMELINES.map((t) => (
-                      <button type="button" key={t} className={form.timeline === t ? "on" : ""} onClick={() => setForm({ ...form, timeline: t })}>{t}</button>
+                      <button type="button" key={t} className={`k-pill ${form.timeline === t ? "on" : ""}`} onClick={() => setForm({ ...form, timeline: t })}>
+                        {t}
+                      </button>
                     ))}
                   </div>
-                </label>
+                </div>
               </>
             )}
             {stage >= 2 && (
               <>
-                <div className="form-row">
-                  <label>Your name *<input value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} autoComplete="name" placeholder="What should we call you?" required maxLength={100} /></label>
-                  <label>Work email *<input value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} type="email" autoComplete="email" placeholder="you@company.com" required maxLength={254} /></label>
+                <div className="k-form-row">
+                  <label className="k-field">
+                    Your name *
+                    <input className="k-input" value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} autoComplete="name" placeholder="What should we call you?" required maxLength={100} />
+                  </label>
+                  <label className="k-field">
+                    Work email *
+                    <input className="k-input" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} type="email" autoComplete="email" placeholder="you@company.com" required maxLength={254} />
+                  </label>
                 </div>
-                <label>The brief — problem, users, outcome *<textarea value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows={5} placeholder="What is broken or missing? Who feels it? What does success look like?" required minLength={10} maxLength={5000} /></label>
-                <p className="sp-summary mono">{form.type} · {form.budget} · {form.timeline}</p>
+                <label className="k-field" style={{ marginTop: "1.25rem" }}>
+                  The brief — problem, users, outcome *
+                  <textarea className="k-textarea" value={form.message} onChange={(e) => setForm({ ...form, message: e.target.value })} rows={5} placeholder="What is broken or missing? Who feels it? What does success look like?" required minLength={10} maxLength={5000} />
+                </label>
+                <p className="k-pill-summary" style={{ marginTop: "1rem" }}>
+                  {form.type} · {form.budget} · {form.timeline}
+                </p>
               </>
             )}
           </motion.div>
         </AnimatePresence>
 
-        <div className="form-bottom">
+        <div className="k-form-foot">
           <span>{stage < 2 ? "Pick an option to continue." : "We reply within 2 working days."}</span>
-          <span style={{ display: "flex", gap: 10 }}>
-            {stage > 0 && <button className="button button-quiet" type="button" onClick={() => setStage(stage - 1)}>← Back</button>}
-            {stage < 2
-              ? <button className="button button-primary" type="button" onClick={() => setStage(stage + 1)}>Continue →</button>
-              : <button className="button button-primary" type="submit" disabled={status.kind === "loading"}>{status.kind === "loading" ? "Sending…" : "Send brief"} <span>↗</span></button>}
+          <span className="k-form-actions">
+            {stage > 0 && (
+              <button className="k-btn" type="button" onClick={() => setStage(stage - 1)}>
+                ← Back
+              </button>
+            )}
+            {stage < 2 ? (
+              <button className="k-btn k-btn--solid" type="button" onClick={() => setStage(stage + 1)}>
+                Continue →
+              </button>
+            ) : (
+              <button className="k-btn k-btn--solid" type="submit" disabled={status.kind === "loading"}>
+                {status.kind === "loading" ? "Sending…" : "Send brief"} <span className="k-btn-arrow">↗</span>
+              </button>
+            )}
           </span>
         </div>
-        {status.message && <p className={`form-status ${status.kind}`} role="status" aria-live="polite">{status.message}</p>}
-        <p className="form-fallback">Prefer email? <a href="mailto:hello.gensolutions@gmail.com">hello.gensolutions@gmail.com</a></p>
+        {status.message && (
+          <p className={`k-form-status ${status.kind}`} role="status" aria-live="polite">
+            {status.message}
+          </p>
+        )}
+        <p className="k-form-fallback">
+          Prefer email? <a href="mailto:hello.gensolutions@gmail.com">hello.gensolutions@gmail.com</a>
+        </p>
       </form>
-    </>
+    </div>
   );
 }
