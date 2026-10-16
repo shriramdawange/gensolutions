@@ -31,27 +31,62 @@ export default function ContactForm() {
   }
 
   return (
-    <form className="contact-form" onSubmit={handleSubmit}>
-      <div className="form-heading"><span className="mono">PROJECT ENQUIRY / 001</span><span className="form-required">* REQUIRED</span></div>
-      <div className="form-row">
-        <label>Your name *<input name="name" autoComplete="name" placeholder="What should we call you?" required maxLength={100} /></label>
-        <label>Work email *<input name="email" type="email" autoComplete="email" placeholder="you@company.com" required maxLength={254} /></label>
+    <form className="k-form" onSubmit={handleSubmit}>
+      <div className="k-form-head">
+        <span>Project enquiry / 001</span>
+        <span className="k-form-required">* Required</span>
       </div>
-      <label>What can we help with? *
-        <select name="interest" required defaultValue="">
-          <option value="" disabled>Select an area</option>
-          <option>AI engineering & agents</option>
+      <div className="k-form-row">
+        <label className="k-field">
+          Your name *
+          <input className="k-input" name="name" autoComplete="name" placeholder="What should we call you?" required maxLength={100} />
+        </label>
+        <label className="k-field">
+          Work email *
+          <input className="k-input" name="email" type="email" autoComplete="email" placeholder="you@company.com" required maxLength={254} />
+        </label>
+      </div>
+      <label className="k-field">
+        What can we help with? *
+        <select className="k-select" name="interest" required defaultValue="">
+          <option value="" disabled>
+            Select an area
+          </option>
+          <option>AI engineering &amp; agents</option>
           <option>Software / platform development</option>
-          <option>Research & development</option>
+          <option>Research &amp; development</option>
           <option>Product collaboration</option>
           <option>Careers / joining the team</option>
           <option>Other / not sure yet</option>
         </select>
       </label>
-      <label>Tell us a little about it *<textarea name="message" rows={4} placeholder="The challenge, the idea, the outcome you have in mind…" required minLength={10} maxLength={5000} /></label>
-      <div className="form-bottom"><span>We’ll use these details only to respond to your enquiry.</span><button className="button button-primary" type="submit" disabled={state.kind === "loading"}>{state.kind === "loading" ? "Sending…" : "Send enquiry"} <span>↗</span></button></div>
-      {state.message && <p className={`form-status ${state.kind}`} role="status" aria-live="polite">{state.message}</p>}
-      <p className="form-fallback">Prefer email? <a href="mailto:hello.gensolutions@gmail.com">hello.gensolutions@gmail.com</a></p>
+      <label className="k-field">
+        Tell us a little about it *
+        <textarea
+          className="k-textarea"
+          name="message"
+          rows={4}
+          placeholder="The challenge, the idea, the outcome you have in mind…"
+          required
+          minLength={10}
+          maxLength={5000}
+        />
+      </label>
+      <div className="k-form-foot">
+        <span>We’ll use these details only to respond to your enquiry.</span>
+        <button className="k-btn k-btn--solid" type="submit" disabled={state.kind === "loading"}>
+          {state.kind === "loading" ? "Sending…" : "Send enquiry"}
+          <span className="k-btn-arrow">↗</span>
+        </button>
+      </div>
+      {state.message && (
+        <p className={`k-form-status ${state.kind}`} role="status" aria-live="polite">
+          {state.message}
+        </p>
+      )}
+      <p className="k-form-fallback">
+        Prefer email? <a href="mailto:hello.gensolutions@gmail.com">hello.gensolutions@gmail.com</a>
+      </p>
     </form>
   );
 }
