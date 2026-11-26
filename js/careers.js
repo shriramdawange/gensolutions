@@ -71,6 +71,7 @@
     }
     const putText=(id,value)=>{const element=document.getElementById(id);if(element)element.textContent=value;};
     putText("role-title",activeOpening.title);
+    document.title=activeOpening.title+" — DAVAN Technologies";
     putText("role-summary",activeOpening.summary);
     putText("role-description",activeOpening.description);
     putText("role-vacancies",activeOpening.vacancies+" "+(Number(activeOpening.vacancies)===1?"VACANCY":"VACANCIES"));
@@ -196,7 +197,7 @@
           })
         });
         if(!result.ok)throw new Error("Your resume uploaded, but the application could not be saved. Please retry or contact the hiring team.");
-        form.reset();uploadedResume=null;selectedSkills=[];renderSkillOptions();resumeName.textContent="Choose your resume";parseStatus.textContent="";workplaceField.hidden=true;
+        form.reset();uploadedResume=null;selectedSkills=[];renderSkillOptions();resumeName.textContent="Choose your resume";parseStatus.textContent="";workplaceField.hidden=true;form.elements.current_workplace.required=false;
         formStatus.classList.add("success");formStatus.textContent="Application received. Thank you for applying to DAVAN Technologies.";
       }catch(error){
         formStatus.classList.add("error");formStatus.textContent=error&&error.message?error.message:"Something went wrong. Please try again.";
