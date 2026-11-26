@@ -88,7 +88,7 @@ export default function Home() {
           <div className="intro-layout">
             <h2>Curiosity is the<br />starting point.<br /><span className="muted-text">Impact is the goal.</span></h2>
             <div className="intro-copy">
-              <p className="large-copy">GenSolutions is an engineering and innovation company working at the intersection of AI, research and product development.</p>
+              <p className="large-copy">DAVAN Technologies is an engineering and innovation company working across AI, software, research and purposeful product development.</p>
               <p>We bring a builder’s mindset to hard problems: understand the context, challenge assumptions, engineer carefully and validate what we create. Our work spans client engagements, internal R&D and products with a purpose.</p>
               <a className="text-link" href="#approach">How we work <span>↘</span></a>
               <br /><a className="know-more" href="/about">Know more about us <span>→</span></a>
@@ -162,8 +162,8 @@ export default function Home() {
 
         <section className="section-wrap careers-section" id="careers">
           <div className="careers-card">
-            <div className="careers-orb" aria-hidden="true"><span>G</span></div>
-            <div className="careers-content"><div className="section-kicker"><span>06</span> / CAREERS</div><h2>Make room for<br /><span className="gradient-text">your curiosity.</span></h2><p>Interested in AI, engineering, research or building products with purpose? Tell us what you’re good at, what you want to learn and what you’d love to build.</p><a className="button button-primary" href="mailto:hello.gensolutions@gmail.com?subject=Careers%20at%20GenSolutions">Introduce yourself <span>↗</span></a><span className="careers-note">No specific opening is advertised here. We welcome relevant introductions.</span></div>
+            <div className="careers-orb" aria-hidden="true"><span>D</span></div>
+            <div className="careers-content"><div className="section-kicker"><span>06</span> / DAVAN CAREERS</div><h2>Build what<br /><span className="gradient-text">comes next.</span></h2><p>We are hiring experienced interns across Full-Stack Development, Flutter Development and Management. Work on real projects, collaborate with a focused team and help turn ideas into shipped outcomes.</p><a className="button button-primary" href="/careers">Explore open positions <span>↗</span></a><span className="careers-note">5 openings · 3 roles · 4 hours per day · Starts 05 December 2026</span></div>
           </div>
         </section>
 
@@ -183,11 +183,11 @@ export default function Home() {
       </main>
       <footer className="site-footer">
         <div className="section-wrap footer-main">
-          <a href="#home" className="brand footer-brand"><span className="brand-mark">G<span>.</span></span><span className="brand-text">GenSolutions<small>GENERATIVE SOLUTIONS</small></span></a>
-          <p>We generate solutions,<br />not just software.</p>
-          <div className="footer-links"><a href="/about">About</a><a href="/capabilities">Capabilities</a><a href="/work">Products</a><a href="/team">Team</a><a href="/#careers">Careers</a><a href="/contact">Contact</a></div>
+          <a href="#home" className="brand footer-brand"><span className="brand-mark">D<span>.</span></span><span className="brand-text">DAVAN<small>TECHNOLOGIES</small></span></a>
+          <p>Build. Manage.<br />Grow with intent.</p>
+          <div className="footer-links"><a href="/about">About</a><a href="/capabilities">Capabilities</a><a href="/work">Products</a><a href="/team">Team</a><a href="/careers">Careers</a><a href="/contact">Contact</a></div>
         </div>
-        <div className="section-wrap footer-bottom"><span>© {new Date().getFullYear()} GenSolutions. Built with intent.</span><span className="mono">{"< GENERATIVE_SOLUTIONS />"}</span><a href="#home">BACK TO TOP ↑</a></div>
+        <div className="section-wrap footer-bottom"><span>© {new Date().getFullYear()} DAVAN Technologies. Built with intent.</span><span className="mono">{"< DAVAN_TECHNOLOGIES />"}</span><a href="#home">BACK TO TOP ↑</a></div>
       </footer>
     </>
   );

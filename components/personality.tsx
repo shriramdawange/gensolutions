@@ -56,7 +56,7 @@ export default function Personality() {
   }, []);
 
   return (
-    <section ref={root} className="gs-pers" aria-label="GenSolutions personality">
+    <section ref={root} className="gs-pers" aria-label="DAVAN Technologies">
       <div className="section-wrap">
         <div className="section-kicker"><span>✳</span> / EXPERIENCE</div>
         <div className="gs-pers-line">

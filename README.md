@@ -1,17 +1,25 @@
-# GenSolutions official website
+# DAVAN Technologies website
 
-A dark, responsive company website built with Next.js App Router, TypeScript, and Tailwind CSS v4. Styling is authored in `app/globals.css` for a highly art-directed, responsive visual system.
+Public website for DAVAN Technologies, built with Next.js App Router, TypeScript and Tailwind CSS v4. The existing `gensolutions.in` domain is retained.
 
-## Included
+## Careers platform
 
-- Responsive navigation and hero section
-- Company positioning and capabilities
-- Product portfolio for ZeroBite, AIRLANCE, and VAYU-SENTINEL
-- Engineering approach, people/culture, and careers sections
-- Project enquiry form with server-side validation
-- Optional Resend email delivery integration
-- SEO metadata and Open Graph basics
-- `.env.example` and this setup guide
+- Dynamic opening list at `/careers` backed by Supabase.
+- Dedicated role pages at `/careers/[slug]`.
+- Application form collects name, email, education, city, current employment status, role, resume, achievements and skills.
+- PDF.js extracts skill suggestions from PDF resume text; candidates can review and edit suggestions before submission.
+- PDF resumes are uploaded to the private `davan-resumes` bucket (5 MB maximum).
+- Application records are written to `public.career_applications`.
+- Both public tables have Row Level Security enabled. Openings are publicly readable; applicant rows are insert-only for anonymous applicants and are not publicly readable.
+- Management reviews candidates in Supabase. No public applicant list or unauthenticated admin dashboard is exposed.
+
+## Supabase project
+
+Project: `DAVAN-CAREERS` (`svsweslezorghidounxd`)  
+Organization: Gensolutions  
+Region: `ap-south-1` (Mumbai)
+
+Public configuration is in `.env.example`. The publishable key is designed for browser use. Never put a Supabase secret/service-role key in frontend code.
 
 ## Run locally
 
@@ -25,21 +33,7 @@ npm run dev
 
 Open http://localhost:3000.
 
-## Connect the enquiry form
-
-The form intentionally does **not** pretend to store or send messages until email delivery is configured.
-
-1. Create a Resend account and API key.
-2. Verify a sending domain/address in Resend.
-3. Copy `.env.example` to `.env.local` and set:
-   - `RESEND_API_KEY`
-   - `CONTACT_TO_EMAIL` (default: `hello@gensolutions.in`)
-   - `CONTACT_FROM_EMAIL` (must be an address/domain verified with your email provider)
-4. Restart the development server.
-
-The API route validates user input and sends the enquiry through Resend. Do not commit `.env.local` or API keys.
-
-## Production check
+## Production checks
 
 ```bash
 npm run lint
@@ -47,27 +41,14 @@ npm run build
 npm run start
 ```
 
-## Deploy
+## Deployment
 
-Recommended: Vercel or another platform that supports Next.js App Router and Node route handlers.
-
-1. Import the repository/project.
-2. Add the three environment variables in the deployment settings.
-3. Deploy and test the contact form on the deployed URL.
-4. In your domain registrar DNS settings, connect `gensolutions.in` using the DNS records supplied by your hosting provider.
-5. Verify both the apex domain and `www` behavior, HTTPS, metadata, and form delivery.
-
-Do not copy DNS values from examples; use the exact values displayed by your selected host and registrar.
+Changes are prepared on the `davan-careers` branch. The connected Vercel team did not show an existing project linked to this repository, and the website domain could not be fetched during verification. Do not change DNS or replace the current live host until the active production provider is confirmed. Deploy this branch to a preview environment first, configure the two public Supabase values, verify an end-to-end test application, then promote it.
 
 ## Before public launch
 
-- Confirm company contact inbox access and email delivery.
-- Review product status and descriptions for accuracy.
-- Add the final approved logo and social links if available.
-- Add privacy notice and any applicable company/legal details.
-- Test keyboard navigation, mobile layouts, and form delivery.
-- Add analytics only if needed and with appropriate privacy disclosures.
-
-## Current product status wording
-
-The portfolio labels ZeroBite as a product in development, AIRLANCE as a product initiative, and VAYU-SENTINEL as a research initiative. Update these labels if the official status changes.
+- Confirm the production host and domain binding.
+- Configure a verified email provider if hiring application notifications are required.
+- Add an approved privacy notice and candidate-data retention period.
+- Review recruitment wording and the final poster asset.
+- Test resume upload, PDF extraction, mobile layouts and application submission.

@@ -94,8 +94,6 @@ export const process = [
 ] as const;
 
 export const team = [
-  { number: "01", name: "SHRIRAM DAWANGE", role: "FOUNDER & LEAD ENGINEER", initials: "SD", accent: "green" },
-  { number: "02", name: "SUDHANSHU YADAV", role: "ENGINEERING", initials: "SY", accent: "cyan" },
-  { number: "03", name: "DEVANSHU DAWARE", role: "DESIGN & PRODUCT", initials: "DD", accent: "green" },
-  { number: "04", name: "CHINMAY RAKHONDE", role: "ENGINEERING & OPERATIONS", initials: "CR", accent: "cyan" },
+  { number: "01", name: "SHUDHANSHU YADAV", role: "FOUNDING MEMBER", initials: "SY", accent: "cyan" },
+  { number: "02", name: "PALLAVI MADAVAN", role: "FOUNDING MEMBER · PAST", initials: "PM", accent: "green" },
 ] as const;

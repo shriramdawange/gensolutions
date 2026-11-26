@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const WORD = "GenSolutions";
+const WORD = "DAVAN";
 
 export default function HeroGsap() {
   const root = useRef<HTMLDivElement>(null);
@@ -48,13 +48,13 @@ export default function HeroGsap() {
 
   return (
     <div ref={root} className="gs-hero">
-      <div className="eyebrow gs-hero-eyebrow"><span className="status-dot" /> INDEPENDENT ENGINEERING &amp; R&amp;D — LIVE LAB</div>
-      <h1 className="gs-hero-word" aria-label="GenSolutions">
+      <div className="eyebrow gs-hero-eyebrow"><span className="status-dot" /> DAVAN TECHNOLOGIES — ENGINEERING &amp; R&amp;D</div>
+      <h1 className="gs-hero-word" aria-label="DAVAN Technologies">
         {WORD.split("").map((ch, i) => (
           <span key={i} className="gs-hero-letter" aria-hidden="true">{ch}</span>
         ))}
       </h1>
-      <p className="hero-lede gs-hero-tag">We generate <span className="gradient-text">solutions,</span> not just software.</p>
+      <p className="hero-lede gs-hero-tag">We build technology for ideas worth making real.</p>
       <div className="hero-actions">
         <a className="button button-primary pointer-events-auto gs-hero-cta" href="#work">Explore our work</a>
         <a className="button button-quiet pointer-events-auto gs-hero-cta" href="/contact">Build with us <span aria-hidden="true">→</span></a>
@@ -68,7 +68,7 @@ export default function HeroGsap() {
         <span className="gs-shape gs-hero-shape s-dome" />
         <span className="gs-shape gs-hero-shape s-dot" />
       </div>
-      <div className="hero-footnote gs-hero-foot"><span className="mono">{"< GENERATIVE_SOLUTIONS />"}</span><span className="flow-text">Ideas → Engineer → Impact — live</span></div>
+      <div className="hero-footnote gs-hero-foot"><span className="mono">{"< DAVAN_TECHNOLOGIES />"}</span><span className="flow-text">Ideas → Engineer → Impact — live</span></div>
     </div>
   );
 }
