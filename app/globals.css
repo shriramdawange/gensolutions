@@ -485,3 +485,5 @@ h2{font-size:clamp(38px,5vw,64px);line-height:1.08;letter-spacing:-.065em;font-w
  .career-role-meta{gap:8px}
  .career-role-meta span{font-size:8px}
 }
+
+@media(max-width:600px){.gs-team__grid--founders{grid-template-columns:minmax(0,420px);}}
