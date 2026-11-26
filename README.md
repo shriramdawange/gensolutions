@@ -1,54 +1,36 @@
-# DAVAN Technologies website
+# DAVAN Technologies
 
-Public website for DAVAN Technologies, built with Next.js App Router, TypeScript and Tailwind CSS v4. The existing `gensolutions.in` domain is retained.
+The public website is a static HTML/CSS/JavaScript site intended for GitHub Pages. Its Careers section uses Supabase as the managed backend.
+
+## Website
+- Careers: `/careers/`
+- Roles: `/careers/full-stack-developer/`, `/careers/flutter-developer/`, `/careers/management-intern/`
+- Public founding-member profiles: Shudhanshu Yadav (Founding Member) and Pallavi Madavan (Founding Member · Past).
 
 ## Careers platform
+- Openings and role detail are fetched from `public.career_openings` at runtime.
+- Applications are submitted to `public.career_applications`.
+- Resume PDFs are uploaded to the private `davan-resumes` Supabase Storage bucket (PDF only, 5 MB maximum).
+- PDF.js extracts skill suggestions from selectable PDF text. Candidates can edit, remove or add skills manually.
+- Applicants cannot read application records or set review statuses.
+- No server-side API route or Supabase service-role key is used by the GitHub Pages frontend.
+- New applications can be reviewed in the Supabase dashboard. Email notifications are not configured.
 
-- Dynamic opening list at `/careers` backed by Supabase.
-- Dedicated role pages at `/careers/[slug]`.
-- Application form collects name, email, education, city, current employment status, role, resume, achievements and skills.
-- PDF.js extracts skill suggestions from PDF resume text; candidates can review and edit suggestions before submission.
-- PDF resumes are uploaded to the private `davan-resumes` bucket (5 MB maximum).
-- Application records are written to `public.career_applications`.
-- Both public tables have Row Level Security enabled. Openings are publicly readable; applicant rows are insert-only for anonymous applicants and are not publicly readable.
-- Management reviews candidates in Supabase. No public applicant list or unauthenticated admin dashboard is exposed.
-
-## Supabase project
-
+## Supabase
 Project: `DAVAN-CAREERS` (`svsweslezorghidounxd`)  
-Organization: Gensolutions  
-Region: `ap-south-1` (Mumbai)
+Region: `ap-south-1` (Mumbai)  
+The public publishable key is used in `js/careers.js`. Never store a secret/service-role key in this repository.
 
-Public configuration is in `.env.example`. The publishable key is designed for browser use. Never put a Supabase secret/service-role key in frontend code.
+## GitHub Pages
+The static site files live at the repository root: `index.html`, `css/`, `js/`, `pages/`, `careers/`, `assets/`, and `public/`. GitHub Pages must publish the repository root (or a workflow artifact containing these root-level files). The Next.js `app/` directory is source code and is not the runtime for GitHub Pages.
 
-## Run locally
+Before merging, verify the repository's Pages settings point at the intended publishing branch/root. Test the listing, role pages, PDF parsing, private upload and application insert on a preview.
 
-Requirements: Node.js 20.9 or newer.
-
-```bash
-npm install
-cp .env.example .env.local
-npm run dev
-```
-
-Open http://localhost:3000.
-
-## Production checks
+## Local preview
+Serve the repository root with a local HTTP server (not `file://`) so browser API calls to Supabase work:
 
 ```bash
-npm run lint
-npm run build
-npm run start
+python -m http.server 8000
 ```
 
-## Deployment
-
-Changes are prepared on the `davan-careers` branch. The connected Vercel team did not show an existing project linked to this repository, and the website domain could not be fetched during verification. Do not change DNS or replace the current live host until the active production provider is confirmed. Deploy this branch to a preview environment first, configure the two public Supabase values, verify an end-to-end test application, then promote it.
-
-## Before public launch
-
-- Confirm the production host and domain binding.
-- Configure a verified email provider if hiring application notifications are required.
-- Add an approved privacy notice and candidate-data retention period.
-- Review recruitment wording and the final poster asset.
-- Test resume upload, PDF extraction, mobile layouts and application submission.
+Then open http://localhost:8000.
