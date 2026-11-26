@@ -44,7 +44,7 @@
       '<div class="career-opening-copy"><span class="career-role-label">INTERNSHIP · '+escapeHtml(role.vacancies)+' '+(Number(role.vacancies)===1?"VACANCY":"VACANCIES")+'</span>'+
       '<h3>'+escapeHtml(role.title)+'</h3><p>'+escapeHtml(role.summary)+'</p>'+
       '<div class="career-tags">'+(role.skills||[]).slice(0,5).map(skill=>'<span>'+escapeHtml(skill)+'</span>').join("")+'</div></div>'+
-      '<div class="career-opening-meta"><span>'+escapeHtml(role.hours_per_day)+' HOURS / DAY</span><span>STARTS '+escapeHtml(formatDate(role.start_date))+'</span><a href="./'+encodeURIComponent(role.slug)+'/">View role <b>↗</b></a></div></article>'
+      '<div class="career-opening-meta"><span>'+escapeHtml(role.hours_per_day)+' HOURS / DAY</span><span>STARTS '+escapeHtml(formatDate(role.start_date))+'</span><a href="'+(["full-stack-developer","flutter-developer","management-intern"].includes(role.slug)?"./"+encodeURIComponent(role.slug)+"/":"./role.html?slug="+encodeURIComponent(role.slug))+'">View role <b>↗</b></a></div></article>'
     ).join("");
   }
   async function initListings(){
@@ -56,7 +56,7 @@
     if(element)element.innerHTML=(values||[]).map(item=>"<li>"+escapeHtml(item)+"</li>").join("");
   }
   async function initRole(){
-    const slug=document.body.dataset.role;
+    const slug=document.body.dataset.role || new URLSearchParams(window.location.search).get("slug");
     if(!slug)return;
     const openings=await getOpenings();
     activeOpening=openings.find(role=>role.slug===slug)||null;

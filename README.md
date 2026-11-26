@@ -8,7 +8,7 @@ The public website is a static HTML/CSS/JavaScript site intended for GitHub Page
 - Public founding-member profiles: Shudhanshu Yadav (Founding Member) and Pallavi Madavan (Founding Member · Past).
 
 ## Careers platform
-- Openings and role detail are fetched from `public.career_openings` at runtime.
+- Openings and role detail are fetched from `public.career_openings` at runtime. The three initial roles have dedicated static paths; any additional published slug uses the shared static `careers/role.html?slug=...` detail page.
 - Applications are submitted to `public.career_applications`.
 - Resume PDFs are uploaded to the private `davan-resumes` Supabase Storage bucket (PDF only, 5 MB maximum).
 - PDF.js extracts skill suggestions from selectable PDF text. Candidates can edit, remove or add skills manually.
